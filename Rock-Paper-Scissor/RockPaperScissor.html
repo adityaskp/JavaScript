@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<hmtl>
+    <head>
+        <title>Rock Paper Scissor</title>
+        <style>
+            body{
+                background-color: rgb(25,25,25);
+                color: white;
+                font-family: Arial;
+            }
+            .Heading{
+                font-size: 50px;
+                font-weight: bold;
+            }
+            .icon{
+                height: 50px;
+            }
+            .btn{
+                background: transparent;
+                border: 3px solid white;
+                width: 120px;
+                height: 120px;
+                border-radius: 60px;
+                margin-right: 10px;
+                cursor: pointer;
+            }
+            .js-Result{
+                font-size: 25px;
+                font-weight: bold;
+                margin-top: 50px;
+            }
+            .js-Score{
+                margin-top: 60px;
+                margin-bottom: 60px;
+
+            }
+        </style>
+    </head>
+    <body>
+        <p class="Heading">Rock Paper Scissor Game</p>
+        <button class = 'Rock btn' onclick="getResult('Rock');"><img src ='rock-emoji.png' class = "icon" ></button>
+        <button class = 'Paper btn' onclick="getResult('Paper');"><img src ='paper-emoji.png' class = "icon" ></button>
+        <button class = 'Scissor btn' onclick="getResult('Scissor');"><img src ='scissor-emoji.png' class = "icon" ></button>
+        <p class="js-Result"></p>
+        <p class="js-Score"></p>
+        <p class="js-playerMove">Your Move - <img src="rock-emoji.png" class = "icon" ></p>
+        <p class="js-computerMove">Computer Move - <img src="rock-emoji.png" class = "icon" ></p>
+
+        <button onclick="resetScore();">Reset Score</button>
+
+
+
+
+
+        <script>
+            function compChoice(){
+                let randomChoice = Math.floor(Math.random()*3)
+                let plays = {
+                    0:'Rock',
+                    1:'Paper',
+                    2:'Scissor'
+                };
+                let compPlay =plays[randomChoice];
+                return compPlay;
+            }
+
+            function resetScore(){
+                score = {
+                        win: 0,
+                        lose: 0,
+                        draw: 0
+                    };
+                console.log(score);
+                document.querySelector('.js-Result').innerHTML = `You Reset the score`;
+                document.querySelector('.js-Score').innerHTML = `Score is - Wins - ${score.win}, Losses - ${score.lose}, Draws - ${score.draw}`;
+                document.querySelector('.js-playerMove').innerHTML = '';
+                document.querySelector('.js-computerMove').innerHTML = '';
+                
+                localStorage.setItem('score',JSON.stringify(score));
+            }
+            
+            function getResult(playerPlay){
+                let score = JSON.parse(localStorage.getItem('score')) || {
+                    win: 0,
+                    lose: 0,
+                    draw: 0
+                };
+
+                let MatchResult = '';
+                let printResult = document.querySelector('.js-Result'); 
+                let printScore = document.querySelector('.js-Score');
+                let printPlayerMove = document.querySelector('.js-playerMove');
+                let printComputerMove = document.querySelector('.js-computerMove');
+                let compPlay = compChoice();
+                console.log('Your Play is ' + playerPlay);
+                console.log("Computer's Play is " + compPlay);
+
+                if (playerPlay === 'Rock'){
+                    if (compPlay === 'Rock'){
+                        MatchResult = 'Draw';
+                        score.draw += 1;
+                    }else if(compPlay === 'Paper'){
+                        console.log('Lose');
+                        MatchResult = 'Lose';
+                        score.lose += 1;
+                    }else if(compPlay === 'Scissor'){
+                        console.log('Win');
+                        MatchResult = 'Win';
+                        score.win += 1;
+                    }
+                }
+
+                if (playerPlay === 'Paper'){
+                    if (compPlay === 'Paper'){
+                        console.log('Draw');
+                        MatchResult = 'Draw';
+                        score.draw += 1;
+                    }else if(compPlay === 'Rock'){
+                        console.log('Win');
+                        MatchResult = 'Win';
+                        score.win += 1;
+                    }else if(compPlay === 'Scissor'){
+                        console.log('Lose');
+                        MatchResult = 'Lose';
+                        score.lose += 1;
+                    }
+                }
+
+                if (playerPlay === 'Scissor'){
+                    if (compPlay === 'Scissor'){
+                        console.log('Draw');
+                        MatchResult = 'Draw';
+                        score.draw += 1;
+                    }else if(compPlay === 'Paper'){
+                        console.log('Win');
+                        MatchResult = 'Win';
+                        score.win += 1;
+                    }else if(compPlay === 'Rock'){
+                        console.log('Loose');
+                        MatchResult = 'Lose';
+                        score.lose += 1;
+                    }
+                }
+
+                printResult.innerHTML =  `You ${MatchResult}`;
+                printScore.innerHTML = `Score is - Wins - ${score.win}, Losses - ${score.lose}, Draws - ${score.draw}`;
+                printPlayerMove.innerHTML = `Your Move - <img src="${playerPlay.toLowerCase()}-emoji.png" class = "icon" >`;
+                printComputerMove.innerHTML = `Computer Move - <img src="${compPlay.toLowerCase()}-emoji.png" class = "icon" >`;
+                console.log(score);
+                localStorage.setItem('score',JSON.stringify(score));
+            
+            }
+            
+        </script>
+    </body>
+</hmtl>
