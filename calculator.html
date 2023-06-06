@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body{
+            background-color: black;
+        }
+        div{
+            padding: 10px;
+        }
+        button{
+            padding: 12px;
+            width: 50px;
+            border-radius: 24px;
+            margin-right: 5px;
+            text-align: center;
+            color: aliceblue;
+            font-size: 20px;
+            font-weight: 300;
+            border: none;
+            font-weight: bold;
+        }
+        .equalsButton{
+            padding: 10px;
+            width: 160px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 5px;
+            background-color:rgb(174, 176, 179)
+
+        }
+        .grey{
+            background-color:rgb(86, 88, 90);
+            color: black;
+            
+        }
+        .dgrey{
+            background-color:rgb(174, 176, 179)
+        }
+        .orange{
+            background-color: rgb(237, 193, 81);
+        }
+        .dot{
+            padding: 10px;
+            width: 50px;
+            border-radius: 8px;
+            text-align: center;
+            background-color: rgb(237, 193, 81);
+        }
+        p{
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: large;
+            color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <p class="js-input"> </p>
+    <div>
+        <button onclick='input("clear");' class="grey">AC</button>
+        <button onclick='input("%");' class="grey">%</button>
+        <button onclick='input(" + ");' class="grey">+</button>
+        <button onclick='input(" - ");' class="orange">-</button>
+    </div>
+    <div>
+        <button onclick='input(7);' class="dgrey">7</button>
+        <button onclick='input(8);' class="dgrey">8</button>
+        <button onclick='input(9);' class="dgrey">9</button>
+        <button onclick='input(" * ");' class="orange">*</button>
+    </div>
+    <div>
+        <button onclick='input(4);' class="dgrey">4</button>
+        <button onclick='input(5);' class="dgrey">5</button>
+        <button onclick='input(6);' class="dgrey">6</button>
+        <button onclick='input(" / ");' class="orange">/</button>    
+    </div>
+    <div>
+        <button onclick='input(1);' class="dgrey">1</button>
+        <button onclick='input(2);' class="dgrey">2</button>
+        <button onclick='input(3);' class="dgrey">3</button>
+        <button onclick='input(0);' class="orange">0</button>    
+    </div> 
+    <div>
+        <button onclick='input(" = ");' class="equalsButton">=</button>
+        <button onclick='input(".");' class="dot">.</button>
+    </div> 
+    
+    
+    <script>
+
+        function input(inp){
+
+            let inputfield = document.querySelector(".js-input")
+            let previnput = inputfield.innerHTML;
+
+            if(inp === 'clear'){
+                inputfield.innerHTML = '';
+            }else if (inp != ' = '){
+
+                inputfield.innerHTML = previnput + String(inp); 
+
+            }else{
+                let total = eval(previnput);
+                inputfield.innerHTML = total;
+
+            }
+        }
+
+    </script>
+
+</body>
+</html>
