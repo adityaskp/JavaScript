@@ -1,0 +1,28 @@
+body{
+    font-family: Arial;
+
+}
+.displaygrid, .mainframe{
+    display: grid;
+    grid-template-columns: 200px 150px 100px;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+.mainframe{
+    margin-bottom: 10px;
+}
+.cssitemname, .cssitemdate{
+    font-size: 15px;
+    padding: 6px;
+}
+.cssadd, .cssdelete{
+    background-color: green;
+    color: aliceblue;
+    border: none;
+    padding: 15px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.cssdelete{
+    background-color: red;
+}
